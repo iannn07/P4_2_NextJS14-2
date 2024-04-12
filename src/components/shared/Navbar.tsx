@@ -1,14 +1,12 @@
-'use client'
+'use client';
 import { NavLinks } from '@/constants';
-// import { useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import AuthProviders from '../auth/AuthProviders';
-import { useSession } from 'next-auth/react';
 
 const Navbar = () => {
-  const {data: session} = useSession();
-  // const session = null;
+  const { data: session } = useSession();
 
   return (
     <nav className='flexBetween navbar'>
@@ -29,8 +27,17 @@ const Navbar = () => {
       </div>
 
       <div className='flexCenter gap-4'>
-        {session ? (
+        {session?.user ? (
           <>
+            {session?.user?.image && (
+              <Image
+                src={session.user.image}
+                alt='Profile'
+                width={30}
+                height={30}
+                className='rounded-full'
+              />
+            )}
             <Link href={'/create-project'}>Share Yours!</Link>
           </>
         ) : (
