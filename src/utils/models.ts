@@ -12,6 +12,9 @@ const userSchema = new Schema(
       unique: [true, 'Email already exists.'],
     },
     image: String,
+    description: String,
+    githubUrl: String,
+    linkedinUrl: String,
   },
   { timestamps: true }
 );

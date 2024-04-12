@@ -4,9 +4,17 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import AuthProviders from '../auth/AuthProviders';
+import { User } from 'next-auth';
 
 const Navbar = () => {
   const { data: session } = useSession();
+
+  /*
+    IDK why is the session?.user?.id is not working,
+    but somehow using this type assertion fix the bug :3
+  */
+  const user = session?.user as User | undefined;
+  // console.log(user?.id);
 
   return (
     <nav className='flexBetween navbar'>
@@ -30,14 +38,17 @@ const Navbar = () => {
         {session?.user ? (
           <>
             {session?.user?.image && (
-              <Image
-                src={session.user.image}
-                alt='Profile'
-                width={30}
-                height={30}
-                className='rounded-full'
-              />
+              <Link href={`/profile/${user?.id}`}>
+                <Image
+                  src={session?.user?.image}
+                  alt='Profile'
+                  width={30}
+                  height={30}
+                  className='rounded-full'
+                />
+              </Link>
             )}
+
             <Link href={'/create-project'}>Share Yours!</Link>
           </>
         ) : (

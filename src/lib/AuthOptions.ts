@@ -3,7 +3,7 @@ import NextAuth from 'next-auth/next';
 import GoogleProvider from 'next-auth/providers/google';
 import { connectDB } from '@/utils/database';
 
-export const AuthOptions = NextAuth ({
+export const AuthOptions = NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -18,18 +18,20 @@ export const AuthOptions = NextAuth ({
     async session({ session }) {
       const sessionUser = await User.findOne({ email: session.user?.email });
 
-      if (sessionUser) {
-        const updatedUser = {
-          ...session.user,
-          id: sessionUser._id,
-        };
-        return { ...session, user: updatedUser };
-      }
+      const updatedUser = {
+        ...session.user,
+        id: sessionUser._id,
+      };
 
+      session.user = updatedUser;
       return session;
     },
 
-    async signIn({ profile }: { profile?: { name?: string; email?: string; picture?: string } }) {
+    async signIn({
+      profile,
+    }: {
+      profile?: { name?: string; email?: string; picture?: string };
+    }) {
       try {
         await connectDB();
 
