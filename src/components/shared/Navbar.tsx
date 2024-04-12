@@ -1,11 +1,14 @@
+'use client'
 import { NavLinks } from '@/constants';
 // import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import AuthProviders from '../auth/AuthProviders';
+import { useSession } from 'next-auth/react';
 
 const Navbar = () => {
-  const session = {};
+  const {data: session} = useSession();
+  // const session = null;
 
   return (
     <nav className='flexBetween navbar'>
