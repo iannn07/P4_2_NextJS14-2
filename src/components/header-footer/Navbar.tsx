@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import AuthProviders from '../auth/AuthProviders';
 import { User } from 'next-auth';
+import ProfileMenu from '../shared/ProfileMenu';
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -37,17 +38,7 @@ const Navbar = () => {
       <div className='flexCenter gap-4'>
         {session?.user ? (
           <>
-            {session?.user?.image && (
-              <Link href={`/profile/${user?.id}`}>
-                <Image
-                  src={session?.user?.image}
-                  alt='Profile'
-                  width={30}
-                  height={30}
-                  className='rounded-full'
-                />
-              </Link>
-            )}
+            <ProfileMenu session={session} user={user} />
 
             <Link href={'/create-project'}>Share Yours!</Link>
           </>

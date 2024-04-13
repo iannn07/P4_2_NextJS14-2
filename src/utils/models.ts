@@ -11,12 +11,46 @@ const userSchema = new Schema(
       required: [true, 'Email is required.'],
       unique: [true, 'Email already exists.'],
     },
-    image: String,
-    description: String,
-    githubUrl: String,
-    linkedinUrl: String,
+    image: String
   },
   { timestamps: true }
 );
 
+const projectSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: [true, 'Title is required.'],
+    },
+    description: {
+      type: String,
+      required: [true, 'Description is required.'],
+    },
+    image: {
+      type: String,
+      required: [true, 'Image is required.'],
+    },
+    liveSiteUrl: {
+      type: String,
+      unique: true,
+      required: [true, 'Live site URL is required.'],
+    },
+    githubUrl: {
+      type: String,
+      unique: true,
+      required: [true, 'Github URL is required.'],
+    },
+    category: {
+      type: String,
+      required: [true, 'Category is required.'],
+    },
+    creator: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    }
+  }
+);
+
 export const User = models.User || model('User', userSchema);
+export const Project = models.Project || model('Project', projectSchema);
