@@ -17,13 +17,18 @@ export interface ProjectInterface {
   githubUrl: string;
   category: string;
   id: string;
-  createdBy: {
+  creator: {
     name: string;
     email: string;
-    avatarUrl: string;
+    image: string;
     id: string;
   };
 }
+
+export interface ProjectCardProps {
+  project: ProjectInterface;
+}
+
 
 export interface UserProfile {
   id: string;
