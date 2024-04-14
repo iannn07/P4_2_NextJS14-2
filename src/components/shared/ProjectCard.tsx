@@ -3,10 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
-  const { id, title, image } = project;
+  const { _id, title, image } = project;
   const creatorImage = project.creator.image;
   const creatorName = project.creator.name;
-  const creatorId = project.creator.id;
+  const creatorId = project.creator._id;
   const randomLikes = Math.floor(Math.random() * 10000);
   const randomViews = String(
     (Math.floor(Math.random() * 10000) / 1000).toFixed(1) + 'K'
@@ -15,7 +15,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
     <div className='flexCenter flex-col rounded-2xl drop-shadow-card'>
       <Link
-        href={`/project/${id}`}
+        href={`/project/${_id}?creator=${creatorId}`}
         className='flexCenter group relative w-full h-full'
       >
         <Image

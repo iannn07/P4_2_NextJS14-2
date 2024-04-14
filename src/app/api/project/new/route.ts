@@ -19,7 +19,6 @@ export const POST = async (req: Request) => {
     category,
     creator,
   } = await req.json();
-  console.log('Hi bitch')
 
   if (
     !title ||

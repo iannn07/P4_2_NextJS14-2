@@ -16,19 +16,18 @@ export interface ProjectInterface {
   liveSiteUrl: string;
   githubUrl: string;
   category: string;
-  id: string;
+  _id: string;
   creator: {
     name: string;
     email: string;
     image: string;
-    id: string;
+    _id: string;
   };
 }
 
 export interface ProjectCardProps {
   project: ProjectInterface;
 }
-
 
 export interface UserProfile {
   id: string;

@@ -17,8 +17,6 @@ const Home = () => {
     fetchProjects();
   }, []);
 
-  console.log(projects);
-
   return (
     <section className='flex-start flex-col paddings mb-6'>
       <h1>Categories</h1>
@@ -26,7 +24,7 @@ const Home = () => {
         <section className='projects-grid'>
           {projects?.map((project: ProjectInterface) => (
             <ProjectCard
-              key={project.id}
+              key={project?._id}
               project={project}
             />
           ))}
