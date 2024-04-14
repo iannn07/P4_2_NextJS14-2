@@ -4,7 +4,7 @@ import Categories from '@/components/shared/Categories';
 import ProjectCard from '@/components/shared/ProjectCard';
 import { ProjectInterface } from '@/utils/common.types';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 const Home = () => {
   const searchParams = useSearchParams();
@@ -27,7 +27,9 @@ const Home = () => {
 
   return (
     <section className='flex-start flex-col paddings mb-6'>
-      <Categories />
+      <Suspense>
+        <Categories />
+      </Suspense>
 
       {projects.length !== 0 ? (
         <section className='projects-grid'>
