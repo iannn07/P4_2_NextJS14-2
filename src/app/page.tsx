@@ -3,12 +3,15 @@
 import Categories from '@/components/shared/Categories';
 import ProjectCard from '@/components/shared/ProjectCard';
 import { ProjectInterface } from '@/utils/common.types';
-import { useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
 
-const Home = () => {
-  const searchParams = useSearchParams();
-  const category = searchParams?.get('category');
+type Props = {
+  searchParams: {
+    category?: string;
+  };
+};
+
+const Home = ({ searchParams: { category } }: Props) => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
