@@ -32,12 +32,10 @@ const projectSchema = new Schema(
     },
     liveSiteUrl: {
       type: String,
-      unique: true,
       required: [true, 'Live site URL is required.'],
     },
     githubUrl: {
       type: String,
-      unique: true,
       required: [true, 'Github URL is required.'],
     },
     category: {

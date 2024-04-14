@@ -23,10 +23,7 @@ const Home = () => {
       {projects.length !== 0 ? (
         <section className='projects-grid'>
           {projects?.map((project: ProjectInterface) => (
-            <ProjectCard
-              key={project?._id}
-              project={project}
-            />
+            <ProjectCard key={project?._id} project={project} />
           ))}
         </section>
       ) : (

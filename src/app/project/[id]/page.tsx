@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-const project = ({ params }: any) => {
+const Project = ({ params }: any) => {
   const searchParams = useSearchParams();
   const creator = searchParams.get('creator');
   const { data: session } = useSession();
@@ -25,6 +25,7 @@ const project = ({ params }: any) => {
       if (!res.ok) {
         throw new Error('Failed to fetch project');
       }
+
       const data = await res.json();
 
       setProject(data);
@@ -128,4 +129,4 @@ const project = ({ params }: any) => {
   );
 };
 
-export default project;
+export default Project;
