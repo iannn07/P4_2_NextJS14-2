@@ -11,7 +11,7 @@ export const categoryFilters = [
   'Backend',
   'Full-Stack',
   'Mobile',
-  'UI/UX',
+  'UI UX',
   'Game Dev',
   'DevOps',
   'Data Science',
