@@ -5,12 +5,12 @@ import { useRouter } from 'next/navigation';
 import { useCallback, useRef } from 'react';
 
 const Modal = ({ children }: { children: React.ReactNode }) => {
+  const router = useRouter();
   const overlay = useRef<HTMLDivElement>(null);
   const wrapper = useRef<HTMLDivElement>(null);
-  const router = useRouter();
 
   const onDismiss = useCallback(() => {
-    router.back();
+    router.push('/');
   }, [router]);
 
   const handleClick = useCallback(

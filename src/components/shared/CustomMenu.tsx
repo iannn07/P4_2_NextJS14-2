@@ -4,7 +4,7 @@ import { Fragment } from "react";
 
 type Props = {
   title: string;
-  state: string;
+  state?: string;
   filters: string[];
   // eslint-disable-next-line no-unused-vars
   setState: (value: string) => void;

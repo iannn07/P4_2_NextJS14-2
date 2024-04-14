@@ -3,7 +3,7 @@ import { Project } from '@/utils/models';
 
 export const GET = async (
   // Don't ask me why although req is not used, it is required for this API route to work
-  req: any,
+  req: Request,
   { params: { userId } }: { params: { userId: string } }
 ) => {
   try {

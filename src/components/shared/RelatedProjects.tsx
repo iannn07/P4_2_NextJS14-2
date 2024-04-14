@@ -22,10 +22,6 @@ const RelatedProjects = ({ user, projectId }: Props) => {
           cache: 'no-store',
         });
 
-        if (!res.ok) {
-          throw new Error('Failed to fetch related projects');
-        }
-
         const data = await res.json();
         const filterData = data.filter((project: ProjectInterface) => {
           return project._id !== projectId;
@@ -63,7 +59,7 @@ const RelatedProjects = ({ user, projectId }: Props) => {
               key={index}
             >
               <Link
-                href={`/project/${projectId}?creator=${user._id}`}
+                href={`/project/${filter._id}?creator=${user._id}`}
                 className='flexCenter group relative w-full h-full'
               >
                 <Image

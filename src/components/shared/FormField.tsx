@@ -1,7 +1,7 @@
 type Props = {
   type?: string;
   title: string;
-  state: string;
+  state?: string;
   placeholder: string;
   isTextArea?: boolean;
   // eslint-disable-next-line no-unused-vars

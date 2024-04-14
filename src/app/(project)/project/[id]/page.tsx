@@ -2,6 +2,7 @@
 'use client';
 
 import Modal from '@/components/shared/Modal';
+import ProjectActions from '@/components/shared/ProjectActions';
 import RelatedProjects from '@/components/shared/RelatedProjects';
 import { ProjectInterface } from '@/utils/common.types';
 import { useSession } from 'next-auth/react';
@@ -68,7 +69,7 @@ const Project = ({ params }: any) => {
 
         {session?.user?.email === project?.creator?.email && (
           <div className='flex justify-end items-center gap-2'>
-            {/* <ProjectActions projectId={project?.id} /> */}
+            <ProjectActions projectId={project?._id ?? ''} />
           </div>
         )}
       </section>

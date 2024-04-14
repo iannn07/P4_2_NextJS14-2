@@ -2,24 +2,26 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import FormField from './FormField';
 import CustomMenu from './CustomMenu';
 import { categoryFilters } from '@/constants';
 import Button from './Button';
+import { ProjectInterface } from '@/utils/common.types';
 import { Session, User } from 'next-auth';
 
 type Props = {
-  type: string,
-  session: Session
-}
+  type: string;
+  session: Session;
+  project?: ProjectInterface;
+};
 
-const ProjectForm = ({ type, session }: Props) => {
+const ProjectForm = ({ type, session, project }: Props) => {
   const user = session?.user as User | undefined;
-
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [form, setForm] = useState({
+
+  const [form, setForm] = useState(() => ({
     title: '',
     description: '',
     image: '',
@@ -27,7 +29,22 @@ const ProjectForm = ({ type, session }: Props) => {
     githubUrl: '',
     category: '',
     creator: '',
-  });
+  }));
+
+  // Performance Issue Fix
+  useEffect(() => {
+    if (type === 'edit' && project) {
+      setForm({
+        title: project.title,
+        description: project.description,
+        image: project.image,
+        liveSiteUrl: project.liveSiteUrl,
+        githubUrl: project.githubUrl,
+        category: project.category,
+        creator: project.creator._id,
+      });
+    }
+  }, [project, type]);
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,8 +64,25 @@ const ProjectForm = ({ type, session }: Props) => {
             category: form.category,
             creator: user?.id,
           }),
+          cache: 'no-store',
         });
 
+        if (res.ok) {
+          router.push('/');
+        }
+      } else if (type === 'edit') {
+        const res = await fetch(`/api/project/${project?._id}`, {
+          method: 'PATCH',
+          body: JSON.stringify({
+            title: form.title,
+            description: form.description,
+            image: form.image,
+            liveSiteUrl: form.liveSiteUrl,
+            githubUrl: form.githubUrl,
+            category: form.category,
+          }),
+          cache: 'no-store',
+        });
         if (res.ok) {
           router.push('/');
         }
@@ -152,8 +186,8 @@ const ProjectForm = ({ type, session }: Props) => {
         <Button
           title={
             isSubmitting
-              ? `${type === 'create' ? 'Creating' : 'Editing'}`
-              : `${type === 'create' ? 'Create' : 'Edit'}`
+              ? `${type == 'create' ? 'Creating' : 'Editing'}`
+              : `${type == 'create' ? 'Create' : 'Edit'}`
           }
           type='submit'
           leftIcon={isSubmitting ? '' : '/plus.svg'}
