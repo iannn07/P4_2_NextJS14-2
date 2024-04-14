@@ -15,7 +15,6 @@ const Navbar = () => {
     but somehow using this type assertion fix the bug :3
   */
   const user = session?.user as User | undefined;
-  // console.log(user?.id);
 
   return (
     <nav className='flexBetween navbar'>

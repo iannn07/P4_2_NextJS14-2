@@ -32,22 +32,14 @@ export interface ProjectCardProps {
 }
 
 export interface UserProfile {
-  id: string;
   name: string;
   email: string;
+  image: string;
+  _id: string;
   description: string | null;
-  avatarUrl: string;
   githubUrl: string | null;
   linkedinUrl: string | null;
-  projects: {
-    edges: { node: ProjectInterface }[];
-    pageInfo: {
-      hasPreviousPage: boolean;
-      hasNextPage: boolean;
-      startCursor: string;
-      endCursor: string;
-    };
-  };
+  projects: ProjectInterface[];
 }
 
 export interface SessionInterface extends Session {

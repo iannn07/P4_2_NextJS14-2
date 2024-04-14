@@ -40,8 +40,6 @@ const Home = () => {
           <p className='no-result-text text-center'>No projects found</p>
         </section>
       )}
-
-      <h1>Load More</h1>
     </section>
   );
 };
