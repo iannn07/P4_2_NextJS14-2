@@ -9,6 +9,13 @@ export type FormState = {
   category: string;
 };
 
+export interface UserProps {
+  name: string;
+  email: string;
+  image: string;
+  _id: string;
+}
+
 export interface ProjectInterface {
   title: string;
   description: string;
@@ -17,12 +24,7 @@ export interface ProjectInterface {
   githubUrl: string;
   category: string;
   _id: string;
-  creator: {
-    name: string;
-    email: string;
-    image: string;
-    _id: string;
-  };
+  creator: UserProps;
 }
 
 export interface ProjectCardProps {

@@ -2,6 +2,7 @@
 'use client';
 
 import Modal from '@/components/shared/Modal';
+import RelatedProjects from '@/components/shared/RelatedProjects';
 import { ProjectInterface } from '@/utils/common.types';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -119,10 +120,10 @@ const project = ({ params }: any) => {
         <span className='w-full h-0.5 bg-light-white-200' />
       </section>
 
-      {/* <RelatedProjects
-        userId={project?.creator?.id}
-        projectId={project?.id}
-      /> */}
+      <RelatedProjects
+        user={project?.creator ?? { _id: '', name: '', image: '', email: '' }}
+        projectId={project?._id ?? ''}
+      />
     </Modal>
   );
 };
